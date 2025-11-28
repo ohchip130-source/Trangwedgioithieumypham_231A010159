@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký Tài Khoản</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f8c8dc;
+            color: #b3006b;
+        }
+
+        header {
+            background: #fdeef4;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        nav a {
+            margin: 0 12px;
+            text-decoration: none;
+            color: #b3006b;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #d63384;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            padding: 20px;
+        }
+
+        #registration {
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        #registration h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #b3006b;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        form input {
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: 1px solid #d63384;
+            font-size: 16px;
+        }
+
+        form button {
+            padding: 12px;
+            background: #d63384;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        form button:hover {
+            background: #b3006b;
+        }
+
+        #registration-message {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #fdeef4;
+            color: #b3006b;
+            font-weight: 600;
+            font-size: 15px;
+            box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        footer .social {
+            color: #d63384;
+            font-weight: bold;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        footer .social:hover {
+            color: #b3006b;
+            text-shadow: 0 0 6px #d63384;
+        }
+
+        @media screen and (max-width: 500px) {
+            #registration {
+                padding: 20px;
+            }
+
+            form input {
+                font-size: 14px;
+            }
+
+            form button {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Beauty by Uynn</h1>
+   <nav>
+        <a href="trangchu.html">Trang chủ</a>
+        <a href="sanpham.html">Sản phẩm</a>
+        <a href="trangdangkytaikhoan.html">Đăng ký tài khoản</a>
+        <a href="chamsockhachhang.html">Chăm sóc khách hàng</a>
+        <a href="#" id="cart-btn">🛒 Giỏ hàng (<span id="cart-count">0</span>)</a>
+   </nav>
+</header>
+
+<main>
+    <section id="registration">
+        <h2>Đăng ký tài khoản của bạn tại đây 👇❤️</h2>
+
+        <form id="registration-form" onsubmit="return validateForm()">
+            <label for="username">Tên người dùng:</label>
+            <input type="text" id="username" name="username" placeholder="Nhập tên người dùng">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Nhập email của bạn">
+
+            <label for="phone">Số điện thoại:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại" pattern="[0-9]{10,12}" title="Nhập số điện thoại hợp lệ">
+
+            <label for="password">Mật khẩu:</label>
+            <input type="password" id="password" name="password" placeholder="Nhập mật khẩu">
+
+            <label for="confirm-password">Xác nhận mật khẩu:</label>
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Xác nhận mật khẩu">
+
+            <button type="submit">Đăng Ký</button>
+        </form>
+
+        <p id="registration-message"></p>
+    </section>
+</main>
+
+<script>
+function validateForm() {
+    const username = document.getElementById('username').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+    const message = document.getElementById('registration-message');
+
+    if (username === "") {
+        message.textContent = "Tên người dùng không được để trống.";
+        message.style.color = "red";
+        return false;
+    }
+
+    if (!isValidEmail(email)) {
+        message.textContent = "Email không hợp lệ. Vui lòng nhập lại.";
+        message.style.color = "red";
+        return false;
+    }
+
+    if (!/^\d{10,12}$/.test(phone)) {
+        message.textContent = "Số điện thoại không hợp lệ. Nhập 10 chữ số.";
+        message.style.color = "red";
+        return false;
+    }
+
+    if (password !== confirmPassword) {
+        message.textContent = "Mật khẩu không khớp. Vui lòng kiểm tra lại.";
+        message.style.color = "red";
+        return false;
+    }
+
+    message.textContent = "🎉 Bạn đã đăng ký thành công.";
+    message.style.color = "green";
+
+    setTimeout(() => {
+        document.getElementById('registration-form').reset();
+        message.textContent = "";
+    }, 2000);
+
+    return false;
+}
+
+function isValidEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+</script>
+
+<footer>
+    <p>&copy; 2025 Beauty by Uynn. Pastel Cosmetic Website.</p>
+
+    <p>
+        <a class="social" href="https://www.facebook.com/beautybyuyn" target="_blank">Facebook</a> |
+        <a class="social" href="https://www.instagram.com/beautybyuyn" target="_blank">Instagram</a> |
+        <a class="social" href="https://www.tiktok.com/@beautybyuyn" target="_blank">TikTok</a>
+    </p>
+</footer>
+
+</body>
+</html>

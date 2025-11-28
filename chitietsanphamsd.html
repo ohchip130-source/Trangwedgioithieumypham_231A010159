@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sản phẩm - Beauty by Uynn</title>
+
+    <style>
+        
+        body{
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f8c8dc;
+            color: #b3006b;
+        }
+
+        header{
+            background: #fdeef4;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .back{
+            display: inline-block;
+            margin: 20px;
+            text-decoration: none;
+            color: #b3006b;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .products-container{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .product-card{
+            background: #fdeef4;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            padding: 20px;
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .product-card img{
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        .product-card h2{
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .price{
+            font-size: 20px;
+            font-weight: bold;
+            color: #d63384;
+            margin-bottom: 10px;
+        }
+
+        .product-card p{
+            margin: 8px 0;
+        }
+
+        .btn{
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background: #d63384;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .btn:hover{ opacity: 0.85; }
+
+        footer{
+            text-align: center;
+            padding: 20px;
+            background: #fdeef4;
+            margin-top: 40px;
+            font-weight: 600;
+            border-radius: 20px 20px 0 0;
+        }
+
+        @media(max-width: 768px){
+            .products-container{
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>Chi tiết sản phẩm</header>
+
+    <a href="trangchu.html" class="back">← Quay lại trang chủ</a>
+
+    <div class="products-container" id="products-container">
+
+    </div>
+
+    <footer>
+    <p>© 2025 Beauty by Uynn – Pastel Cosmetic Website</p>
+    <p>
+        <a href="https://www.facebook.com/beautybyuyn" target="_blank">Facebook</a> |
+        <a href="https://www.instagram.com/beautybyuyn" target="_blank">Instagram</a> |
+        <a href="https://www.tiktok.com/@beautybyuyn" target="_blank">TikTok</a>
+
+    </p>
+</footer>
+
+<style>
+    footer a.social{
+        color: #d63384;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    footer a.social:hover{
+        opacity: 0.7;
+        text-decoration: underline;
+    }
+</style>
+
+
+    <script>
+        const products = [
+            {
+                title: "Son dưỡng Roman",
+                price: "180.000đ",
+                img: "https://down-vn.img.susercontent.com/file/sg-11134253-821gc-mgqx0g0aqbrje2.webp",
+                desc: "- Dưỡng ẩm sâu: Đôi môi của bạn sẽ luôn căng mọng và mềm mại nhờ công thức thuần chay giàu dưỡng chất.",
+                features: ["Dưỡng ẩm sâu", "Hương nhẹ dễ chịu", "Không chứa parabens", "Màu tự nhiên"]
+            },
+            {
+                title: "Dưỡng môi Vaseline",
+                price: "70.000đ",
+                img: "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lxtr76ddfzkp45.webp",
+                desc: "Dưỡng ẩm và phục hồi môi khô hiệu quả! Vaseline Lip Therapy 20g là lựa chọn tuyệt vời giúp môi luôn mềm mại, căng mọng và rạng rỡ. Sản phẩm phù hợp cho mọi loại môi, kể cả môi nhạy cảm,mang lại cảm giác dễ chịu và bảo vệ môi khỏi tác động của môi trường.",
+                features: ["Làm hồng môi", "Tẩy da chết môi nhẹ nhàng"]
+            },
+            {
+                title: "Son dưỡng Mediheal",
+                price: "100.000đ",
+                img: "https://down-vn.img.susercontent.com/file/vn-11134207-7ra0g-m7xfk4k1ty8766.webp",
+                desc: "Son dưỡng môi Mediheal Labocare Panteno Lips 10ml là sự lựa chọn hoàn hảo cho đôi môi khô, nứt nẻ và thâm sạm. Với công thức giàu dưỡng chất và Panthenol, sản phẩm không chỉ dưỡng ẩm mà còn phục hồi đôi môi trở nên mềm mịn và tươi sáng.",
+                features: ["Dành cho môi khô","Dành cho môi thâm"]
+            }
+            
+        ];
+
+        const container = document.getElementById("products-container");
+
+        products.forEach(product => {
+            const card = document.createElement("div");
+            card.classList.add("product-card");
+
+            card.innerHTML = `
+                <img src="${product.img}" alt="${product.title}">
+                <h2>${product.title}</h2>
+                <p class="price">Giá: ${product.price}</p>
+                <p>${product.desc}</p>
+                <p>✔ ${product.features.join("<br>✔ ")}</p>
+                <a href="#" class="btn">Thêm vào giỏ hàng 🛒</a>
+            `;
+
+            container.appendChild(card);
+        });
+    </script>
+</body>
+</html>

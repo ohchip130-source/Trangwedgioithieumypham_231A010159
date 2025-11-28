@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang Sản phẩm - Beauty by Uynn</title>
+
+    <style>
+        
+        body{
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f8c8dc;
+            color: #b3006b;
+        }
+        header{
+            background: #fdeef4;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .logo{
+            color: #b3006b;
+            font-weight: bold;
+            font-size: 24px;
+            animation: softGlow 3s infinite ease-in-out;
+        }
+        @keyframes softGlow {
+            0% { text-shadow: 0 0 0px #d63384; }
+            50% { text-shadow: 0 0 8px #d63384; }
+            100% { text-shadow: 0 0 0px #d63384; }
+        }
+        nav a{
+            margin: 0 12px;
+            text-decoration: none;
+            color: #b3006b;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        nav a:hover{
+            color: #d63384;
+        }
+
+        #cart-btn{
+            font-weight: bold;
+            background: #d63384;
+            padding: 8px 15px;
+            border-radius: 25px;
+            color: white;
+        }
+        #cart-btn:hover{
+            background: #b3006b;
+        }
+
+        .cart-modal{
+            display: none;
+            position: fixed;
+            right: 20px;
+            top: 80px;
+            width: 320px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 9999;
+        }
+        .cart-item{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #f3cddd;
+            padding-bottom: 5px;
+        }
+        .close-cart{
+            float: right;
+            cursor: pointer;
+            color: #b3006b;
+            font-weight: bold;
+        }
+
+        .back-home{
+            display: inline-block;
+            margin: 20px;
+            padding: 10px 18px;
+            background: #d63384;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background 0.3s ease;
+        }
+        .back-home:hover{
+            background: #b3006b;
+        }
+
+        .search-bar{
+            margin: 20px auto 20px;
+            text-align: center;
+        }
+        .search-bar input{
+            width: 300px;
+            padding: 10px;
+            border-radius: 25px;
+            border: 2px solid #d63384;
+        }
+
+        .products{
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .grid{
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+            gap: 25px;
+        }
+
+        .card{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            border-radius: 15px;
+            padding: 15px;
+            transition: transform .3s, box-shadow .3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            border: 2px solid #f5dce9;
+        }
+        .card:hover{
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            border-color: #d63384;
+        }
+        .card img{
+            width: 120px;
+            border-radius: 12px;
+        }
+        .card-info{
+            text-align: left;
+            padding-left: 15px;
+            flex: 1;
+        }
+        .card-info button{
+            margin-top: 8px;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 20px;
+            background: #d63384;
+            color: #fff;
+            cursor: pointer;
+        }
+        .card-info button:hover{
+            background: #b3006b;
+        }
+
+        #noResult{
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #b3006b;
+            font-weight: bold;
+        }
+
+        footer{
+            text-align: center;
+            padding: 20px;
+            background: #fdeef4;
+            margin-top: 30px;
+            color: #b3006b;
+        }
+
+        .social{
+            color: #d63384;
+            font-weight: bold;
+        }
+        .social:hover{
+            color: #b3006b;
+        }
+
+        .modal{
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content{
+            background: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+        }
+        .close{
+            position: absolute;
+            top: 10px; right: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #b3006b;
+            cursor: pointer;
+        }
+        .modal-content button{
+            background: #d63384;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 25px;
+            color: white;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h2 class="logo">Beauty by Uynn</h2>
+    <nav>
+        <a href="trangchu.html">Trang chủ</a>
+        <a href="sanpham.html">Sản phẩm</a>
+        <a href="trangdangkytaikhoan.html">Đăng ký tài khoản</a>
+        <a href="chamsockhachhang.html">Chăm sóc khách hàng</a>
+        <a href="#" id="cart-btn">🛒 Giỏ hàng (<span id="cart-count">0</span>)</a>
+    </nav>
+</header>
+
+<div id="cartModal" class="cart-modal">
+    <span class="close-cart">&times;</span>
+    <h3>Giỏ hàng</h3>
+    <div id="cartItems"></div>
+    <p><b>Tổng tiền:</b> <span id="totalPrice">0₫</span></p>
+</div>
+
+<a href="trangchu.html" class="back-home">← Quay lại Trang chủ</a>
+
+<div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Tìm sản phẩm...">
+</div>
+
+<section class="products">
+    <div id="productGrid" class="grid">
+
+        <div class="card" data-title="Son dưỡng Dior Addict Lip Glow" data-price="950000" data-desc="Son dưỡng Dior mang lại màu tự nhiên và độ ẩm mịn suốt 24h.">
+            <img src="https://product.hstatic.net/1000025647/product/set-duong-dior-001-004_c6ce1be18a8a4a42894faadd3fbae0bd.png">
+            <div class="card-info">
+                <h3>Son dưỡng Dior Addict Lip Glow</h3>
+                <p>Giá: 950,000₫</p>
+                <button class="viewDetail">Xem chi tiết</button>
+            </div>
+        </div>
+
+        <div class="card" data-title="Kem chống nắng Anessa SPF50+" data-price="420000" data-desc="Kem chống nắng Nhật Bản bảo vệ da hoàn hảo, thẩm thấu nhanh.">
+            <img src="https://bizweb.dktcdn.net/100/132/269/products/kcn-annesa1-9fe068f4b195472fb59acca30fd76fd8.webp?v=1678952652380">
+            <div class="card-info">
+                <h3>Kem chống nắng Anessa SPF50+</h3>
+                <p>Giá: 420,000₫</p>
+                <button class="viewDetail">Xem chi tiết</button>
+            </div>
+        </div>
+
+        <div class="card" data-title="Sữa rửa mặt Cetaphil" data-price="210000" data-desc="Sữa rửa mặt dịu nhẹ, phù hợp da nhạy cảm.">
+            <img src="https://media.hcdn.vn/catalog/product/g/o/google-shopping-sua-rua-mat-cetaphil-diu-nhe-khong-xa-phong-500ml-moi-1684727079_img_450x450_31d6f9_fit_center.jpg">
+            <div class="card-info">
+                <h3>Sữa rửa mặt Cetaphil</h3>
+                <p>Giá: 210,000₫</p>
+                <button class="viewDetail">Xem chi tiết</button>
+            </div>
+        </div>
+
+        <div class="card" data-title="Phấn nước Laneige Neo Cushion" data-price="760000" data-desc="Phấn nước che phủ tốt, giữ nền 24 giờ.">
+            <img src="https://media.hcdn.vn/wysiwyg/minhchau/phan-nuoc-laneige-cang-bong-24h-2x15g-4.jpg">
+            <div class="card-info">
+                <h3>Phấn nước Laneige Neo Cushion</h3>
+                <p>Giá: 760,000₫</p>
+                <button class="viewDetail">Xem chi tiết</button>
+            </div>
+        </div>
+
+        <div class="card" data-title="Nước tẩy trang Bioderma" data-price="320000" data-desc="Tẩy sạch dịu nhẹ, không gây khô da.">
+            <img src="https://product.hstatic.net/1000025647/product/nuoc_tay_trang_bioderma_sensibio_h2o_500ml_8a0699dd3dc64ea0b1c5d7bf67bfa38c.jpg">
+            <div class="card-info">
+                <h3>Nước tẩy trang Bioderma</h3>
+                <p>Giá: 320,000₫</p>
+                <button class="viewDetail">Xem chi tiết</button>
+            </div>
+        </div>
+
+        <div class="card" data-title="Son 3CE Velvet Lip Tint" data-price="320000" data-desc="Son lì mịn môi, lâu trôi, chất son siêu nhẹ.">
+            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mdvlxet2cp342e@resize_w900_nl.webp">
+            <div class="card-info">
+                <h3>Son 3CE Velvet Lip Tint</h3>
+                <p>Giá: 320,000₫</p>
+                <button class="viewDetail">Xem chi tiết</button>
+            </div>
+        </div>
+
+        <div class="card" data-title="Serum Vitamin C" data-price="280000" data-desc="Tinh chất dưỡng sáng, mờ thâm và tái tạo da.">
+            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lvbz6sthsryl80.webp">
+            <div class="card-info">
+                <h3>Serum Vitamin C</h3>
+                <p>Giá: 280,000₫</p>
+                <button class="viewDetail">Xem chi tiết</button>
+            </div>
+        </div>
+
+        <div class="card" data-title="Kem Body Vaseline" data-price="160000" data-desc="Dưỡng trắng da body, cấp ẩm suốt 24h.">
+            <img src="https://down-vn.img.susercontent.com/file/sg-11134253-7rd4e-m78g658uzeuo22.webp">
+            <div class="card-info">
+                <h3>Kem Body Vaseline</h3>
+                <p>Giá: 160,000₫</p>
+                <button class="viewDetail">Xem chi tiết</button>
+            </div>
+        </div>
+
+    </div>
+
+    <p id="noResult">Không tìm thấy sản phẩm nào</p>
+</section>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <img id="modalImg" style="width: 100%; border-radius: 12px;">
+        <h3 id="modalTitle"></h3>
+        <p><span id="modalPrice"></span></p>
+        <p id="modalDesc"></p>
+        <button id="modalAddCart">Thêm vào giỏ</button>
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 Beauty by Uynn – Pastel Cosmetic Website</p>
+    <p>
+        <a href="https://www.facebook.com/beautybyuyn" target="_blank">Facebook</a> |
+        <a href="https://www.instagram.com/beautybyuyn" target="_blank">Instagram</a> |
+        <a href="https://www.tiktok.com/@beautybyuyn" target="_blank">TikTok</a>
+
+    </p>
+</footer>
+
+<script>
+const searchInput = document.getElementById('searchInput');
+const productGrid = document.getElementById('productGrid');
+const products = Array.from(productGrid.getElementsByClassName('card'));
+const noResult = document.getElementById('noResult');
+
+searchInput.addEventListener('input', function(){
+    const filter = searchInput.value.toLowerCase();
+    let anyVisible = false;
+    products.forEach(card=>{
+        const title = card.getElementsByTagName('h3')[0].innerText.toLowerCase();
+        if(title.includes(filter)){
+            card.style.display='flex';
+            anyVisible=true;
+        } else {
+            card.style.display='none';
+        }
+    });
+    noResult.style.display = anyVisible ? 'none' : 'block';
+});
+
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modalImg');
+const modalTitle = document.getElementById('modalTitle');
+const modalPrice = document.getElementById('modalPrice');
+const modalDesc = document.getElementById('modalDesc');
+const modalAddCart = document.getElementById('modalAddCart');
+const closeModal = document.getElementsByClassName('close')[0];
+
+let selectedProduct = null;
+
+document.querySelectorAll('.viewDetail').forEach(btn=>{
+    btn.addEventListener('click',function(){
+        const card = this.closest('.card');
+
+        selectedProduct = {
+            title: card.dataset.title,
+            price: card.dataset.price,
+            desc: card.dataset.desc
+        };
+
+        modalImg.src = card.getElementsByTagName('img')[0].src;
+        modalTitle.innerText = selectedProduct.title;
+        modalPrice.innerText = Number(selectedProduct.price).toLocaleString() + "₫";
+        modalDesc.innerText = selectedProduct.desc;
+
+        modal.style.display='block';
+    });
+});
+
+closeModal.onclick = ()=> modal.style.display='none';
+window.onclick = (e)=>{ if(e.target==modal) modal.style.display='none'; };
+
+let cart = [];
+const cartBtn = document.getElementById('cart-btn');
+const cartModal = document.getElementById('cartModal');
+const closeCart = document.querySelector('.close-cart');
+const cartCount = document.getElementById('cart-count');
+const cartItems = document.getElementById('cartItems');
+const totalPrice = document.getElementById('totalPrice');
+
+cartBtn.onclick = ()=> cartModal.style.display = 'block';
+closeCart.onclick = ()=> cartModal.style.display = 'none';
+
+function updateCart(){
+    cartItems.innerHTML = "";
+    let total = 0;
+
+    cart.forEach(item=>{
+        total += item.price;
+
+        cartItems.innerHTML += `
+            <div class="cart-item">
+                <span>${item.title}</span>
+                <span>${item.price.toLocaleString()}₫</span>
+            </div>
+        `;
+    });
+
+    cartCount.innerText = cart.length;
+    totalPrice.innerText = total.toLocaleString() + "₫";
+}
+
+modalAddCart.onclick = ()=>{
+    cart.push({
+        title: selectedProduct.title,
+        price: Number(selectedProduct.price)
+    });
+    updateCart();
+    modal.style.display='none';
+};
+</script>
+
+</body>
+</html>

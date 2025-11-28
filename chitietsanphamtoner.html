@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sản phẩm - Beauty by Uynn</title>
+
+    <style>
+        
+        body{
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f8c8dc;
+            color: #b3006b;
+        }
+
+        header{
+            background: #fdeef4;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .back{
+            display: inline-block;
+            margin: 20px;
+            text-decoration: none;
+            color: #b3006b;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .products-container{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .product-card{
+            background: #fdeef4;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            padding: 20px;
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .product-card img{
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        .product-card h2{
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .price{
+            font-size: 20px;
+            font-weight: bold;
+            color: #d63384;
+            margin-bottom: 10px;
+        }
+
+        .product-card p{
+            margin: 8px 0;
+        }
+
+        .btn{
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background: #d63384;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .btn:hover{ opacity: 0.85; }
+
+        footer{
+            text-align: center;
+            padding: 20px;
+            background: #fdeef4;
+            margin-top: 40px;
+            font-weight: 600;
+            border-radius: 20px 20px 0 0;
+        }
+
+        @media(max-width: 768px){
+            .products-container{
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>Chi tiết sản phẩm</header>
+
+    <a href="trangchu.html" class="back">← Quay lại trang chủ</a>
+
+    <div class="products-container" id="products-container">
+
+    </div>
+
+    <footer>
+    <p>© 2025 Beauty by Uynn – Pastel Cosmetic Website</p>
+    <p>
+       <a href="https://www.facebook.com/beautybyuyn" target="_blank">Facebook</a> |
+       <a href="https://www.instagram.com/beautybyuyn" target="_blank">Instagram</a> |
+       <a href="https://www.tiktok.com/@beautybyuyn" target="_blank">TikTok</a>
+
+    </p>
+</footer>
+
+<style>
+    footer a.social{
+        color: #d63384;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    footer a.social:hover{
+        opacity: 0.7;
+        text-decoration: underline;
+    }
+</style>
+
+
+    <script>
+        const products = [
+            {
+                title: "Tonner Sen Hậu Giang Cocoon",
+                price: "190.000đ",
+                img: "https://down-vn.img.susercontent.com/file/sg-11134253-7reqn-m91ras6rclll4b.webp",
+                desc: "🌟 Nước Sen Hậu Giang Cocoon - Sự lựa chọn hoàn hảo cho làn da nhạy cảm! 🌟",
+                features: ["Phục hồi - cấp ẩm", "Thành phần thuần chay"]
+            },
+            {
+                title: "Nước hoa hồng Klairs",
+                price: "250.000đ",
+                img: "https://down-vn.img.susercontent.com/file/0398475712c4c9a23d2d8c88fb40d539.webp",
+                desc: "Cân bằng độ pH, cấp ẩm sâu và không mùi dịu nhẹ - Nước hoa hồng Klairs Supple Preparation Facial/Unscented chính là bước đầu tiên thiết yếu trong quy trình chăm sóc da của bạn! Với khả năng cân bằng độ pH, cấp ẩm sâu và phù hợp cho mọi loại da, kể cả da nhạy cảm, sản phẩm này giúp da sẵn sàng hấp thụ các dưỡng chất tiếp theo một cách tối ưu.",
+                features: ["Không chứa cồn", "Không hương liệu", "Không gây kích ứng"]
+            },
+            {
+                title: "Nước hoa hồng cấp ẩm và làm sáng da Pyunkang Yul Essence Toner",
+                price: "318.000đ",
+                img: "https://down-vn.img.susercontent.com/file/sg-11134201-7rd53-luebun44uw4yd7.webp",
+                desc: "Cấp ẩm sâu và làm sáng da nổi bật! Nước hoa hồng Pyunkang Yul Essence Toner là lựa chọn lý tưởng cho làn da luôn căng mướt, mềm mại và rạng rỡ. Sản phẩm phù hợp với mọi loại da, kể cả da nhạy cảm, giúp phục hồi và tăng cường hàng rào bảo vệ tự nhiên cho da.",
+                features: ["Hỗ trợ làm sáng da","Phục hồi da hiệu quả", "Tăng độ đàn hồi"]
+            }
+            
+        ];
+
+        const container = document.getElementById("products-container");
+
+        products.forEach(product => {
+            const card = document.createElement("div");
+            card.classList.add("product-card");
+
+            card.innerHTML = `
+                <img src="${product.img}" alt="${product.title}">
+                <h2>${product.title}</h2>
+                <p class="price">Giá: ${product.price}</p>
+                <p>${product.desc}</p>
+                <p>✔ ${product.features.join("<br>✔ ")}</p>
+                <a href="#" class="btn">Thêm vào giỏ hàng 🛒</a>
+            `;
+
+            container.appendChild(card);
+        });
+    </script>
+</body>
+</html>
