@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ - Beauty by Uynn</title>
+
+    <meta name="description" content="Beauty by Uynn - Website mỹ phẩm pastel an toàn, dịu nhẹ, dễ thương. Chăm sóc vẻ đẹp theo phong cách riêng của bạn.">
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <style>
+
+        body{
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f8c8dc;
+            color:#b3006b;
+        }
+
+        header{
+            background: #fdeef4;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .logo{
+            color: #b3006b;
+            font-weight: bold;
+            font-size: 24px;
+            animation: softGlow 3s infinite ease-in-out;
+        }
+
+        @keyframes softGlow {
+            0% { text-shadow: 0 0 0px #d63384; }
+            50% { text-shadow: 0 0 8px #d63384; }
+            100% { text-shadow: 0 0 0px #d63384; }
+        }
+
+        nav a{
+            margin: 0 12px;
+            text-decoration: none;
+            color: #b3006b;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        nav a:hover{
+            color: #d63384;
+        }
+
+        .banner{
+            text-align: center;
+            padding: 70px 25px;
+            background: #fdeef4;
+            border-radius: 0 0 25px 25px;
+        }
+
+        .fade-in{
+            opacity: 0;
+            animation: fadeIn 1.3s ease forwards;
+        }
+        .fade-in-delay{
+            opacity: 0;
+            animation: fadeIn 1.8s ease forwards;
+        }
+        .float-up{
+            opacity: 0;
+            transform: translateY(20px);
+            animation: floatUp 2s ease forwards;
+        }
+
+        @keyframes fadeIn{ to { opacity: 1; } }
+        @keyframes floatUp{
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slogan{
+            margin-top: 15px;
+            font-size: 22px;
+            font-style: italic;
+            color: #b3006b;
+            font-weight: 700;
+        }
+
+        .products{
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .grid{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card{
+            background: #fff;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            transition: transform .3s, box-shadow .3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            border: 2px solid #f5dce9;
+            cursor: pointer;
+        }
+
+        .card:hover{
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            border-color: #d63384;
+        }
+
+        .card img{
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        .card h3{
+            color: #b3006b;
+        }
+
+        .btn{
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: #d63384;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .btn:hover{ opacity: 0.85; }
+
+        @media (max-width: 768px){
+            .grid{
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 480px){
+            .grid{
+                grid-template-columns: 1fr;
+            }
+        }
+
+        footer {
+            text-align: center;           
+            background: #fdeef4;     
+            color: #b3006b;          
+            font-weight: 600;
+            font-size: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        footer a{
+            color: #b3006b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        footer a:hover{ color: #d63384; }
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h2 class="logo">Beauty by Uynn</h2>
+        <nav>
+            <a href="trangchu.html">Trang chủ</a>
+            <a href="sanpham.html">Sản phẩm</a>
+            <a href="trangdangkytaikhoan.html">Đăng ký tài khoản</a>
+            <a href="chamsockhachhang.html">Chăm sóc khách hàng</a>
+            <a href="#" id="cart-btn">🛒 Giỏ hàng (<span id="cart-count">0</span>)</a>
+        </nav>
+    </header>
+
+    <section class="banner">
+        <h1 class="fade-in">Chào mừng đến với Beauty by Uynn 💗💄</h1>
+        <p class="fade-in-delay">Thế giới mỹ phẩm dễ thương – dịu nhẹ – an toàn</p>
+
+        <h2 class="slogan float-up">“Beauty by Uynn – Dịu dàng tỏa sáng theo cách của bạn.”</h2>
+    </section>
+
+    <section class="products">
+        <h2>Những sản phẩm nổi bật</h2>
+
+        <div class="grid">
+
+            <div class="card">
+                <img src="https://cdn.chiaki.vn/unsafe/0x480/left/top/smart/filters:quality(75)/https://chiaki.vn/upload/news/content/2021/11/son-duong-moi-jpg-1636670798-12112021054638.jpg">
+                <h3>Son dưỡng</h3>
+                <a href="chitietsanphamsd.html" class="btn">Xem chi tiết</a>
+            </div>
+
+            <div class="card">
+                <img src="https://chonmyphamtot.com/wp-content/uploads/2020/08/kem-duong-am-da-dau-mun.jpg">
+                <h3>Kem dưỡng ẩm</h3>
+                <a href="chitietsanphamkda.html" class="btn">Xem chi tiết</a>
+            </div>
+
+            <div class="card">
+                <img src="https://cdn.tgdd.vn//News/1450056//top-nuoc-hoa-hong-nhat-ban-tot-va-duoc-nhieu-5-845x500.jpg">
+                <h3>Toner</h3>
+                <a href="chitietsanphamtoner.html" class="btn">Xem chi tiết</a>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Beauty by Uynn – Pastel Cosmetic Website</p>
+        <p>
+            <a href="https://www.facebook.com/beautybyuyn" target="_blank">Facebook</a> |
+            <a href="https://www.instagram.com/beautybyuyn" target="_blank">Instagram</a> |
+            <a href="https://www.tiktok.com/@beautybyuyn" target="_blank">TikTok</a>
+
+        </p>
+    </footer>
+
+    <script>
+        const cartCount = document.getElementById("cart-count");
+        const productCards = document.querySelectorAll(".card");
+
+        let count = 0;
+
+        productCards.forEach(card => {
+            card.addEventListener("click", () => {
+                count++;
+                cartCount.textContent = count;
+            });
+        });
+    </script>
+
+</body>
+</html>
